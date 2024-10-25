@@ -1,0 +1,40 @@
+/* src/styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .app {
+    text-align: center;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #005f73;
+    padding: 10px 0;
+  }
+  
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .scan-btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    color: white;
+    background-color: #56c8d8;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
