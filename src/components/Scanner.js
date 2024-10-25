@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Scanner() {
   const [scanning, setScanning] = useState(false);
-  const [photoTaken, setPhotoTaken] = useState(false); // Estado para verificar si la foto ha sido tomada
+  const [photoTaken, setPhotoTaken] = useState(false); // Para verificar si la foto ha sido tomada
   const [photo, setPhoto] = useState(null); // Para guardar la imagen capturada
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -59,8 +59,16 @@ function Scanner() {
         </button>
       ) : (
         <>
-          <video ref={videoRef} style={{ display: scanning && !photoTaken ? 'block' : 'none', width: '100%' }} />
-          <canvas ref={canvasRef} style={{ display: 'none' }} width="640" height="480"></canvas>
+          <video
+            ref={videoRef}
+            style={{
+              display: scanning && !photoTaken ? 'block' : 'none',
+              width: '400px',
+              height: '400px',
+              objectFit: 'cover'
+            }}
+          />
+          <canvas ref={canvasRef} style={{ display: 'none' }} width="400" height="400"></canvas>
           {scanning && !photoTaken && (
             <button className="capture-btn" onClick={capturePhoto}>
               Tomar Foto
@@ -71,13 +79,15 @@ function Scanner() {
 
       {photoTaken && (
         <div className="photo-preview">
-          <img src={photo} alt="Captura del producto" style={{ width: '200px', height: '200px', objectFit: 'cover' }} />
-          <button className="process-btn" onClick={processPhoto}>
-            Procesar Foto
-          </button>
-          <button className="cancel-btn" onClick={cancelProcess}>
-            Cancelar
-          </button>
+          <img src={photo} alt="Captura del producto" style={{ width: '400px', height: '400px', objectFit: 'cover' }} />
+          <div className="buttons">
+            <button className="process-btn" onClick={processPhoto}>
+              Procesar Foto
+            </button>
+            <button className="cancel-btn" onClick={cancelProcess}>
+              Cancelar
+            </button>
+          </div>
         </div>
       )}
 

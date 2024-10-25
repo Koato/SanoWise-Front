@@ -127,3 +127,63 @@ body {
   height: 200px;
   object-fit: cover;
 }
+
+/* src/styles.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  text-align: center;
+}
+
+.scan-btn, .capture-btn, .process-btn, .cancel-btn {
+  padding: 10px 20px;
+  font-size: 18px;
+  color: white;
+  background-color: #56c8d8;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.cancel-btn {
+  background-color: #ff4d4d; /* Color rojo para el botón de cancelar */
+  margin-left: 10px; /* Separación entre los botones */
+}
+
+.results ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.results li {
+  background-color: #f8f8f8;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.photo-preview img {
+  margin-top: 20px;
+  border-radius: 10px;
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}
+
+/* Centrar los botones debajo de la imagen */
+.photo-preview .buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.photo-preview .buttons button {
+  margin: 0 10px; /* Separación entre los botones */
+}
