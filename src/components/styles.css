@@ -1,44 +1,4 @@
 /* src/styles.css */
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  .app {
-    text-align: center;
-  }
-  
-  .navbar {
-    display: flex;
-    justify-content: space-around;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #005f73;
-    padding: 10px 0;
-  }
-  
-  .navbar a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-  }
-  
-  .scan-btn {
-    padding: 10px 20px;
-    font-size: 18px;
-    color: white;
-    background-color: #56c8d8;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  /* src/styles.css */
 body {
   font-family: Arial, sans-serif;
   background-color: #f2f2f2;
@@ -46,11 +6,38 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
-
+  
 .app {
   text-align: center;
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #005f73;
+  padding: 10px 0;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.scan-btn {
+  padding: 10px 20px;
+  font-size: 18px;
+  color: white;
+  background-color: #56c8d8;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+  
+  /* src/styles.css */
 .scan-btn, .capture-btn, .process-btn {
   padding: 10px 20px;
   font-size: 18px;
@@ -80,18 +67,6 @@ body {
 }
 
 /* src/styles.css */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.app {
-  text-align: center;
-}
-
 .scan-btn, .capture-btn, .process-btn, .cancel-btn {
   padding: 10px 20px;
   font-size: 18px;
@@ -104,20 +79,8 @@ body {
 }
 
 .cancel-btn {
-  background-color: #ff4d4d; /* Color rojo para el botón de cancelar */
+  background-color: #ff4d4d !important;  /* Color rojo para el botón de cancelar */
   margin-left: 10px; /* Separación entre los botones */
-}
-
-.results ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.results li {
-  background-color: #f8f8f8;
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
 }
 
 .photo-preview img {
@@ -129,46 +92,6 @@ body {
 }
 
 /* src/styles.css */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.app {
-  text-align: center;
-}
-
-.scan-btn, .capture-btn, .process-btn, .cancel-btn {
-  padding: 10px 20px;
-  font-size: 18px;
-  color: white;
-  background-color: #56c8d8;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.cancel-btn {
-  background-color: #ff4d4d; /* Color rojo para el botón de cancelar */
-  margin-left: 10px; /* Separación entre los botones */
-}
-
-.results ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.results li {
-  background-color: #f8f8f8;
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
-}
-
 .photo-preview img {
   margin-top: 20px;
   border-radius: 10px;
@@ -189,18 +112,6 @@ body {
 }
 
 /* src/styles.css */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.app {
-  text-align: center;
-}
-
 /* Centrado del contenido del video y botón */
 .scanner {
   display: flex;
@@ -226,40 +137,4 @@ video, img {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
-}
-
-.cancel-btn {
-  background-color: #ff4d4d; /* Color rojo para el botón de cancelar */
-  margin-left: 10px; /* Separación entre los botones */
-}
-
-.results ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.results li {
-  background-color: #f8f8f8;
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.photo-preview img {
-  margin-top: 20px;
-  border-radius: 10px;
-  width: 400px;
-  height: 400px;
-  object-fit: cover;
-}
-
-/* Centrar los botones debajo de la imagen */
-.photo-preview .buttons {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.photo-preview .buttons button {
-  margin: 0 10px; /* Separación entre los botones */
 }
