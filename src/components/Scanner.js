@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Scanner() {
   const [scanning, setScanning] = useState(false);
-  const [photoTaken, setPhotoTaken] = useState(false); // Para verificar si la foto ha sido tomada
+  const [photoTaken, setPhotoTaken] = useState(false); // Estado para verificar si la foto ha sido tomada
   const [photo, setPhoto] = useState(null); // Para guardar la imagen capturada
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -35,13 +35,19 @@ function Scanner() {
 
   // Función para simular el proceso de enviar la imagen y obtener el resultado
   const processPhoto = () => {
-    // Simulamos el proceso de análisis y redirigimos a la página de resultados
     const scannedProduct = {
       id: 1,
       name: "Producto Saludable",
       rating: 4.5,
     };
     navigate('/results', { state: { product: scannedProduct } });
+  };
+
+  // Función para cancelar el proceso
+  const cancelProcess = () => {
+    setPhoto(null); // Limpiar la imagen
+    setPhotoTaken(false); // Regresar a la vista de escaneo
+    setScanning(false); // Resetear estado de escaneo
   };
 
   return (
@@ -54,7 +60,7 @@ function Scanner() {
       ) : (
         <>
           <video ref={videoRef} style={{ display: scanning && !photoTaken ? 'block' : 'none', width: '100%' }} />
-          <canvas ref={canvasRef} style={{ display: 'none' }} width="320" height="240"></canvas>
+          <canvas ref={canvasRef} style={{ display: 'none' }} width="640" height="480"></canvas>
           {scanning && !photoTaken && (
             <button className="capture-btn" onClick={capturePhoto}>
               Tomar Foto
@@ -65,9 +71,12 @@ function Scanner() {
 
       {photoTaken && (
         <div className="photo-preview">
-          <img src={photo} alt="Captura del producto" style={{ width: '100%' }} />
+          <img src={photo} alt="Captura del producto" style={{ width: '200px', height: '200px', objectFit: 'cover' }} />
           <button className="process-btn" onClick={processPhoto}>
             Procesar Foto
+          </button>
+          <button className="cancel-btn" onClick={cancelProcess}>
+            Cancelar
           </button>
         </div>
       )}
