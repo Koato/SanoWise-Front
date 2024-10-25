@@ -14,7 +14,12 @@ function Scanner() {
   const openCamera = async () => {
     setScanning(true);
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      //const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: { exact: 'environment' } // Para usar la cámara trasera
+        }
+      });
       videoRef.current.srcObject = stream;
       videoRef.current.play();
     } catch (err) {
