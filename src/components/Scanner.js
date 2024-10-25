@@ -2,6 +2,11 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// Función para detectar si el dispositivo es móvil
+const isMobileDevice = () => {
+  return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+};
+
 function Scanner() {
   const [scanning, setScanning] = useState(false);
   const [photoTaken, setPhotoTaken] = useState(false); // Para verificar si la foto ha sido tomada
@@ -10,21 +15,22 @@ function Scanner() {
   const canvasRef = useRef(null);
   const navigate = useNavigate();
 
-  // Función para abrir la cámara
+  // Función para abrir la cámara, seleccionando frontal o trasera según el dispositivo
   const openCamera = async () => {
     setScanning(true);
     try {
-      //const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      const stream = await navigator.mediaDevices.getUserMedia({
+      const constraints = {
         video: {
-          facingMode: { exact: 'environment' } // Para usar la cámara trasera
+          facingMode: isMobileDevice() ? { exact: 'environment' } : 'user' // Trasera en móvil, frontal en otros
         }
-      });
+      };
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
       videoRef.current.srcObject = stream;
       videoRef.current.play();
     } catch (err) {
       console.error("Error al abrir la cámara: ", err);
       setScanning(false);
+      alert("No se puede acceder a la cámara, verifica los permisos.");
     }
   };
 
