@@ -3,8 +3,14 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 function Results() {
-  const location = useLocation();  // Usamos useLocation para obtener el estado enviado
-  const { product } = location.state || {};  // Obtenemos el producto del estado si existe
+  const location = useLocation();
+  const { product } = location.state || {};
+
+  const suggestions = [
+    { id: 2, name: "Producto Alternativo 1", rating: 4.7 },
+    { id: 3, name: "Producto Alternativo 2", rating: 4.6 },
+    { id: 4, name: "Producto Alternativo 3", rating: 4.8 },
+  ];
 
   return (
     <div className="results">
@@ -16,6 +22,15 @@ function Results() {
             <p>Calificación: {product.rating} / 5</p>
             <p>Detalles: Ingredientes, impacto nutricional, etc.</p>
           </div>
+
+          <h3>Sugerencias de Productos Alternativos</h3>
+          <ul>
+            {suggestions.map((suggestion) => (
+              <li key={suggestion.id}>
+                <p>{suggestion.name} - Calificación: {suggestion.rating} / 5</p>
+              </li>
+            ))}
+          </ul>
         </>
       ) : (
         <p>No se encontró ningún producto. Escanee uno nuevamente.</p>
