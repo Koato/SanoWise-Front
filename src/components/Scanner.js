@@ -13,7 +13,7 @@ function Scanner() {
   const [photo, setPhoto] = useState(null); // Para guardar la imagen capturada
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook para redireccionar
 
   // Función para abrir la cámara, seleccionando frontal o trasera según el dispositivo
   const openCamera = async () => {
@@ -44,21 +44,52 @@ function Scanner() {
     videoRef.current.srcObject.getTracks().forEach(track => track.stop()); // Detener el video
   };
 
-  // Función para simular el proceso de enviar la imagen y obtener el resultado
-  const processPhoto = () => {
-    const scannedProduct = {
-      id: 1,
-      name: "Producto Saludable",
-      rating: 4.5,
-    };
-    navigate('/results', { state: { product: scannedProduct } });
+  // Función para procesar la foto y enviar al servidor
+  const processPhoto = async () => {
+    if (photo) {
+      const mimeTypeMatch = photo.match(/data:(image\/[a-zA-Z]+);base64,/);
+      if (!mimeTypeMatch) {
+        console.error("No se pudo obtener el tipo de imagen.");
+        return;
+      }
+      const mimeType = mimeTypeMatch[1];
+      const extension = mimeType.split('/')[1];
+      const base64Image = photo.split(',')[1];
+
+      const requestBody = {
+        imageBase64: base64Image,
+        imageExtension: extension
+      };
+
+      try {
+        const response = await fetch("http://localhost:8080/api/analyze/image-text", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(requestBody)
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error al procesar la imagen: ${response.statusText}`);
+        }
+
+        const result = await response.json();
+        console.log("Resultado del análisis:", result);
+        alert("Imagen procesada correctamente. Revisa la consola para ver los resultados.");
+      } catch (error) {
+        console.error("Error al enviar la imagen:", error);
+        alert("Hubo un error al procesar la imagen.");
+      }
+    }
   };
 
-  // Función para cancelar el proceso
-  const cancelProcess = () => {
+  // Función para redirigir a la página de inicio
+  const cancelAndGoHome = () => {
     setPhoto(null); // Limpiar la imagen
     setPhotoTaken(false); // Regresar a la vista de escaneo
     setScanning(false); // Resetear estado de escaneo
+    navigate('/'); // Redirige a la página de inicio
   };
 
   return (
@@ -95,7 +126,7 @@ function Scanner() {
             <button className="process-btn" onClick={processPhoto}>
               Procesar Foto
             </button>
-            <button className="cancel-btn" onClick={cancelProcess}>
+            <button className="cancel-btn" onClick={cancelAndGoHome}>
               Cancelar
             </button>
           </div>

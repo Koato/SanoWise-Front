@@ -6,11 +6,17 @@ function Results() {
   const location = useLocation();
   const { product } = location.state || {};
 
-  const suggestions = [
-    { id: 2, name: "Producto Alternativo 1", rating: 4.7 },
-    { id: 3, name: "Producto Alternativo 2", rating: 4.6 },
-    { id: 4, name: "Producto Alternativo 3", rating: 4.8 },
-  ];
+  const results = {
+    product: {
+      name: "",
+      rating: "",
+      ingredientes: ""
+    }, suggestions: [
+      { id: 2, name: "Producto Alternativo 1", rating: 4.7 },
+      { id: 3, name: "Producto Alternativo 2", rating: 4.6 },
+      { id: 4, name: "Producto Alternativo 3", rating: 4.8 },
+    ]
+  };
 
   return (
     <div className="results">
@@ -20,12 +26,12 @@ function Results() {
           <div className="product-evaluation">
             <p>Producto: {product.name}</p>
             <p>Calificación: {product.rating} / 5</p>
-            <p>Detalles: Ingredientes, impacto nutricional, etc.</p>
+            <p>Detalles: {product.ingredientes} </p>
           </div>
 
           <h3>Sugerencias de Productos Alternativos</h3>
           <ul>
-            {suggestions.map((suggestion) => (
+            {results.suggestions.map((suggestion) => (
               <li key={suggestion.id}>
                 <p>{suggestion.name} - Calificación: {suggestion.rating} / 5</p>
               </li>
