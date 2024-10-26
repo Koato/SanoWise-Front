@@ -44,7 +44,7 @@ function Scanner() {
     videoRef.current.srcObject.getTracks().forEach(track => track.stop()); // Detener el video
   };
 
-  // Función para procesar la foto y enviar al servidor
+  // Función para procesar la foto y enviar al servidor con un retraso de 3 segundos
   const processPhoto = async () => {
     if (photo) {
       const mimeTypeMatch = photo.match(/data:(image\/[a-zA-Z]+);base64,/);
@@ -61,26 +61,28 @@ function Scanner() {
         imageExtension: extension
       };
 
-      try {
-        const response = await fetch("http://localhost:8080/api/analyze/image-text", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(requestBody)
-        });
+      // Esperar 3 segundos antes de enviar la solicitud
+      setTimeout(async () => {
+        try {
+          const response = await fetch("http://localhost:8080/api/analyze/image-text", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestBody)
+          });
 
-        if (!response.ok) {
-          throw new Error(`Error al procesar la imagen: ${response.statusText}`);
+          if (!response.ok) {
+            throw new Error(`Error al procesar la imagen: ${response.statusText}`);
+          }
+
+          const result = await response.json();
+          navigate('/results', { state: { product: result } });
+        } catch (error) {
+          console.error("Error al enviar la imagen:", error);
+          alert("Hubo un error al procesar la imagen.");
         }
-
-        const result = await response.json();
-        console.log("Resultado del análisis:", result);
-        alert("Imagen procesada correctamente. Revisa la consola para ver los resultados.");
-      } catch (error) {
-        console.error("Error al enviar la imagen:", error);
-        alert("Hubo un error al procesar la imagen.");
-      }
+      }, 3000); // Retraso de 3 segundos (3000 milisegundos)
     }
   };
 
